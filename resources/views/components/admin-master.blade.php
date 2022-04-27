@@ -289,7 +289,7 @@
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
-{{--                    <x-admin-top-navbar-user-information></x-admin-top-navbar-user-information>--}}
+                    <x-admin-top-navbar-user-information></x-admin-top-navbar-user-information>
 
                 </ul>
 
