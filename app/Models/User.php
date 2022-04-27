@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -18,14 +19,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-       'username',
+        'username',
         'name',
         'email',
         'password',
     ];
-
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be hidden for arrays.
      *
      * @var array<int, string>
      */
@@ -33,6 +33,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
 
     /**
      * The attributes that should be cast.
@@ -43,14 +44,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-   public function setPasswordAttribute($value){
+    public function setPasswordAttribute($value){
 
-       $this->attributes['password'] = bcrypt($value);
-   }
-   public function getAvatarAttribute($value){
+        $this->attributes['password'] = bcrypt($value);
+    }
+    public function getAvatarAttribute($value){
 
-       return asset($value);
-   }
+        return asset($value);
+    }
 
     public function posts(){
 

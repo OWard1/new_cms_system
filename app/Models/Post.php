@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Post extends Model
 {
@@ -16,16 +17,12 @@ class Post extends Model
         return $this->belongsTo(User::Class);
 
     }
-
-    public function setPostImageAttribute($value){
-
-        $this->attributes['post_image'] = asset($value);
-
-    }
+//    public function setPostImageAttribute($value){
+//
+//        $this->attributes['post_image'] = asset($value);
+//
+//    }
     public function getPostImageAttribute($value){
-    if (strpos($value, 'https://') !== FALSE || strpos($value, 'http://') !== FALSE) {
-        return $value;
-    }
-    return asset('storage/' . $value);
+        return asset($value);
     }
 }

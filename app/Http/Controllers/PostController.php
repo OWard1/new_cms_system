@@ -16,9 +16,6 @@ class PostController extends Controller
 
         $posts = auth()->user()->posts()->paginate(5);
 
-
-
-
         return view('admin.posts.index', ['posts'=> $posts]);
 
     }
