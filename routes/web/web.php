@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,12 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Auth::routes();
-Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
 
-Route::middleware('auth')->group(function(){
+Route::get('/', 'HomeController@index')->name('home');
 
-    Route::get('/admin', 'App\Http\Controllers\AdminController@index')->name('admin.index');
 
+
+Route::middleware('auth')->group(function () {
+    /*-- Admin --*/
+    Route::get('/admin', 'AdminController@index')->name('admin.index');
 });
-

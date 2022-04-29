@@ -57,10 +57,18 @@ class UserController extends Controller
 
     }
 
-    public function attach(Role $role){
+    public function attach(User $user){
 
-        dd($role);
+        $user->roles()->attach(request('role'));
 
+        return back();
+
+    }
+    public function detach(User $user){
+
+        $user->roles()->detach(request('role'));
+
+        return back();
 
     }
 

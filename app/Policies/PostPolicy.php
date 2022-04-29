@@ -14,7 +14,7 @@ class PostPolicy
      * Determine whether the user can view any models.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return mixed
      */
     public function viewAny(User $user)
     {
@@ -26,18 +26,18 @@ class PostPolicy
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return mixed
      */
     public function view(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        return $user->id == $post->user_id;
     }
 
     /**
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return mixed
      */
     public function create(User $user)
     {
@@ -49,11 +49,11 @@ class PostPolicy
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return mixed
      */
     public function update(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        return $user->id == $post->user_id;
     }
 
     /**
@@ -61,11 +61,11 @@ class PostPolicy
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return mixed
      */
     public function delete(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        return $user->id == $post->user_id;
     }
 
     /**
@@ -73,7 +73,7 @@ class PostPolicy
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return mixed
      */
     public function restore(User $user, Post $post)
     {
@@ -85,7 +85,7 @@ class PostPolicy
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return mixed
      */
     public function forceDelete(User $user, Post $post)
     {

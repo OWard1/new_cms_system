@@ -2,85 +2,75 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use Notifiable, HasFactory;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $fillable = [
-        'username',
-        'name',
-        'email',
-        'password',
+        'username', 'name', 'avatar', 'email', 'password',
     ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password', 'remember_token',
     ];
 
-
     /**
-     * The attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
-     * @var array<string, string>
+     * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    public function setPasswordAttribute($value){
-
+    public function setPasswordAttribute($value)
+    {
         $this->attributes['password'] = bcrypt($value);
     }
-    public function getAvatarAttribute($value){
 
+    public function getAvatarAttribute($value)
+    {
         return asset($value);
     }
 
-    public function posts(){
-
-        return $this->hasMany(Post::Class);
-
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
-    public function permissions(){
 
+    public function permissions()
+    {
         return $this->belongsToMany(Permission::class);
-
     }
-    public function roles(){
 
+    public function roles()
+    {
         return $this->belongsToMany(Role::class);
-
     }
 
-    public function userHasRole($role_name){
-        foreach($this->roles as $role){
-
-            if($role_name == $role->name)
-            {
+    public function userHasRole($role_name)
+    {
+        foreach ($this->roles as $role) {
+            if (Str::lower($role_name) == Str::lower($role->name))
                 return true;
-            }
-            return false;
-
         }
-
+        return false;
     }
-
-
 }
